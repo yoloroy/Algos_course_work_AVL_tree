@@ -9,9 +9,9 @@ pluginManagement {
 
     plugins {
         kotlin("multiplatform").version(extra["kotlin.version"] as String)
-        id("org.jetbrains.compose").version(extra["compose.version"] as String)
+        id("org.jetbrains.compose").version(extra["compose.compiler.version"] as String)
     }
 }
 
 rootProject.name = "Algos_course_work_AVL_tree"
-
+include("algorithm_lib")
