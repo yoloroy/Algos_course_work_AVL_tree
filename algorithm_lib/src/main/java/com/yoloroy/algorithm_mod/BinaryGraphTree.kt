@@ -55,6 +55,11 @@ interface BinaryGraphTree<T> {
             }
             return result?.let { ValueWithPath(path, it) }
         }
+
+        operator fun get(leftRight: LeftRight) = when (leftRight) {
+            LeftRight.Left -> left
+            LeftRight.Right -> right
+        }
     }
 
     data class ValueWithPath<T>(val path: Path, val value: T)
