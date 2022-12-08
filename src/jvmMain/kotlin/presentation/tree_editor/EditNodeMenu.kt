@@ -73,14 +73,14 @@ fun EditNodeMenu(
                 Text("Поменять местами поддеревья")
             }
         }
-        if (state.node.left != null && state.node.right == null) {
+        if (state.node.left != null) {
             DropdownMenuItem(
                 onClick = onClickMoveRight
             ) {
                 Text("Сдвинуть вправо")
             }
         }
-        if (state.node.left == null && state.node.right != null) {
+        if (state.node.right != null) {
             DropdownMenuItem(
                 onClick = onClickMoveLeft
             ) {

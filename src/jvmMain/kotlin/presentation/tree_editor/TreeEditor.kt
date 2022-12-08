@@ -132,6 +132,7 @@ fun main() = singleWindowApplication {
             node as MutableNode
             node.parent?.replaceChildAndAssignParent(node, node.left)
             node.left!!.right = node
+            node.parent = node.left!!
             node.left = null
             updateTree()
         },
@@ -139,6 +140,7 @@ fun main() = singleWindowApplication {
             node as MutableNode
             node.parent?.replaceChildAndAssignParent(node, node.right)
             node.right!!.left = node
+            node.parent = node.right!!
             node.right = null
             updateTree()
         }
