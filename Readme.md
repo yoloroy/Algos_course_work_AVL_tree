@@ -10,7 +10,7 @@ Tree editor
 ![](readme/ui_screenshots/TreeEditor.png)
 
 New node creation dialog
-![](readme/ui_screenshots/New node creation dialog.png)
+![](readme/ui_screenshots/New_node_creation_dialog.png)
 
 Menu of options for working with a tree node
-![](readme/ui_screenshots/Menu of options for working with a tree node.png)
+![](readme/ui_screenshots/Menu_of_options_for_working_with_a_tree_node.png)
