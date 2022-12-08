@@ -6,11 +6,8 @@ The developed program should provide to user options to perform direct operation
 
 ## Current state
 
-Tree editor
-![](readme/ui_screenshots/TreeEditor.png)
+### Tree Editor
+| Tree view                                 | New node creation dialog                                | Menu of options for working with a tree node                                |
+|-------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------|
+| ![](readme/ui_screenshots/TreeEditor.png) | ![](readme/ui_screenshots/New_node_creation_dialog.png) | ![](readme/ui_screenshots/Menu_of_options_for_working_with_a_tree_node.png) |
 
-New node creation dialog
-![](readme/ui_screenshots/New_node_creation_dialog.png)
-
-Menu of options for working with a tree node
-![](readme/ui_screenshots/Menu_of_options_for_working_with_a_tree_node.png)
