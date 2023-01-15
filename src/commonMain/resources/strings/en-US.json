@@ -1,0 +1,36 @@
+{
+  "text": {
+    "help": "  All interactions with trees are performed by clicking on their nodes, the number and types of actions can vary from node to node, actions are not displayed if they cannot be performed.\n\n  Also, when working with a regular binary tree, adding new nodes is done by clicking on nodes, denoted by ( + )."
+  },
+  "ui": {
+    "bottomBar": {
+      "help": "Help",
+      "binaryTreeEditor": "Binary tree",
+      "avlTreeEditor": "AVL-tree",
+      "saveTree": "Save tree",
+      "loadTree": "Load tree"
+    },
+    "treeActions": {
+      "binaryTreeEditor": {
+        "delete": "Delete node",
+        "edit": "Edit value",
+        "rotateLL": "Rotate for LL case",
+        "rotateLR": "Rotate for LR case",
+        "rotateRL": "Rotate for RL case",
+        "rotateRR": "Rotate for RR case",
+        "add": "Add node"
+      },
+      "avlTreeEditor": {
+        "delete": "Remove value",
+        "replace": "Replace value",
+        "insert": "Insert value"
+      },
+      "dialogLabel": {
+        "value": "Value",
+        "valueForNode": "Value for node",
+        "cancel": "Cancel",
+        "ok": "Ok"
+      }
+    }
+  }
+}

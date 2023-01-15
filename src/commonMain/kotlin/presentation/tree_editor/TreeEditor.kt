@@ -1,5 +1,6 @@
 package presentation.tree_editor
 
+import StringRes
 import androidx.compose.runtime.*
 import com.yoloroy.algorithm_mod.BinaryGraphTree
 import com.yoloroy.algorithm_mod.BinaryGraphTree.LeftRight
@@ -25,35 +26,35 @@ fun TreeEditor(
         onDismissRequest = { editNodeMenuState = EditNodeMenuState.Hidden() },
         menuItems = listOfNotNull(
             EditNodeMenuItem(
-                name = "Удалить узел",
+                name = StringRes.ui.treeActions.binaryTreeEditor.delete,
                 onClick = { deleteNode(node!!) }
             ).takeIf {
                  node?.parent != null
             },
             EditNodeMenuItem(
-                name = "Изменить значение",
+                name = StringRes.ui.treeActions.binaryTreeEditor.edit,
                 onClick = { editNode(node!!) }
             ),
             EditNodeMenuItem(
-                name = "Осуществить LL-Поворот",
+                name = StringRes.ui.treeActions.binaryTreeEditor.rotateLL,
                 onClick = { rotateLeftLeft(node!!) }
             ).takeIf {
                 node?.left?.left != null
             },
             EditNodeMenuItem(
-                name = "Осуществить LR-Поворот",
+                name = StringRes.ui.treeActions.binaryTreeEditor.rotateLR,
                 onClick = { rotateLeftRight(node!!) }
             ).takeIf {
                 node?.left?.right != null
             },
             EditNodeMenuItem(
-                name = "Осуществить RL-Поворот",
+                name = StringRes.ui.treeActions.binaryTreeEditor.rotateRL,
                 onClick = { rotateRightLeft(node!!) }
             ).takeIf {
                 node?.right?.left != null
             },
             EditNodeMenuItem(
-                name = "Осуществить RR-Поворот",
+                name = StringRes.ui.treeActions.binaryTreeEditor.rotateRR,
                 onClick = { rotateRightRight(node!!) }
             ).takeIf {
                 node?.right?.right != null

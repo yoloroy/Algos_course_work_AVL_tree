@@ -26,14 +26,18 @@ kotlin {
     }
     sourceSets {
         all {
-            languageSettings.optIn("androidx.compose.ui.ExperimentalComposeUiApi")
-            languageSettings.optIn("androidx.compose.material.ExperimentalMaterialApi")
-            languageSettings.optIn("androidx.compose.foundation.ExperimentalFoundationApi")
+            languageSettings.apply {
+                optIn("androidx.compose.ui.ExperimentalComposeUiApi")
+                optIn("androidx.compose.material.ExperimentalMaterialApi")
+                optIn("androidx.compose.foundation.ExperimentalFoundationApi")
+            }
         }
         val commonMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation("${compose.ui}.input.pointer")
+                implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.1")
+
                 implementation(project("algorithm_lib"))
                 implementation(project("tree_saver"))
             }

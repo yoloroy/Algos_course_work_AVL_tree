@@ -1,5 +1,6 @@
 package presentation.tree_editor
 
+import StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -51,13 +52,13 @@ private fun Buttons(dialogData: NodeEditDialogData) {
         TextButton(
             onClick = dialogData.onClickDismiss
         ) {
-            Text("Отмена")
+            Text(StringRes.ui.treeActions.dialogLabel.cancel)
         }
         Button(
             onClick = dialogData.onClickOk,
             enabled = dialogData.isOk ?: false
         ) {
-            Text("Применить")
+            Text(StringRes.ui.treeActions.dialogLabel.ok)
         }
     }
 }

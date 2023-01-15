@@ -1,5 +1,6 @@
 package presentation.main_screen
 
+import StringRes
 import androidx.compose.runtime.*
 import com.yoloroy.algorithm_mod.BinaryGraphTree
 import com.yoloroy.algorithm_mod.BinaryGraphTree.Node
@@ -34,8 +35,8 @@ fun TreeEditorScreen(tree: MutableBinaryGraphTree<Int>, reloadTree: () -> Unit) 
             parent as MutableNode
             dialogData = dialogData.copy(
                 open = true,
-                title = "Добавить узел дерева",
-                label = "Значение в узле",
+                title = StringRes.ui.treeActions.binaryTreeEditor.add,
+                label = StringRes.ui.treeActions.dialogLabel.valueForNode,
                 onClickOk = {
                     when (leftRight) {
                         BinaryGraphTree.LeftRight.Left -> parent.setLeftAndAssignParent(MutableNode(dialogData.inputText.toInt()))
@@ -53,8 +54,8 @@ fun TreeEditorScreen(tree: MutableBinaryGraphTree<Int>, reloadTree: () -> Unit) 
         editNode = mutableNodeLambda { node ->
             dialogData = dialogData.copy(
                 open = true,
-                title = "Изменить значение в узле дерева",
-                label = "Значение в узле",
+                title = StringRes.ui.treeActions.binaryTreeEditor.edit,
+                label = StringRes.ui.treeActions.dialogLabel.valueForNode,
                 onClickOk = {
                     node.value = dialogData.inputText.toInt()
                     reloadTree()

@@ -1,6 +1,7 @@
 package presentation.main_screen
 
 import Global
+import StringRes
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -14,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.useResource
 import androidx.compose.ui.unit.dp
 import com.yoloroy.algorithm_mod.AvlTree
 import com.yoloroy.algorithm_mod.MutableBinaryGraphTree
@@ -153,13 +153,13 @@ private fun BottomBarPageButtons(setPage: (Page) -> Unit) {
         TextButton(onClick = { setPage(Info) }) {
             Icon(
                 imageVector = Icons.Outlined.Info,
-                contentDescription = "Info",
+                contentDescription = StringRes.ui.bottomBar.help,
                 tint = MaterialTheme.colors.onPrimary,
                 modifier = Modifier.size(36.dp)
             )
             Spacer(modifier = Modifier.width(6.dp))
             Text(
-                text = "Справка",
+                text = StringRes.ui.bottomBar.help,
                 color = MaterialTheme.colors.onPrimary
             )
         }
@@ -175,26 +175,26 @@ private fun BottomBarPageButtons(setPage: (Page) -> Unit) {
         ) {
             Icon(
                 painter = painterResource("icons/rebase_edit.svg"),
-                contentDescription = "Tree editor",
+                contentDescription = StringRes.ui.bottomBar.binaryTreeEditor,
                 tint = MaterialTheme.colors.onPrimary,
                 modifier = Modifier.size(36.dp)
             )
             Spacer(modifier = Modifier.width(6.dp))
             Text(
-                text = "Бинарное дерево",
+                text = StringRes.ui.bottomBar.binaryTreeEditor,
                 color = MaterialTheme.colors.onPrimary
             )
         }
         TextButton(onClick = { setPage(AvlTreeEditor) }) {
             Icon(
                 painter = painterResource("icons/binary-search-tree.svg"),
-                contentDescription = "Avl Tree editor",
+                contentDescription = StringRes.ui.bottomBar.avlTreeEditor,
                 tint = MaterialTheme.colors.onPrimary,
                 modifier = Modifier.size(36.dp)
             )
             Spacer(modifier = Modifier.width(6.dp))
             Text(
-                text = "АВЛ-дерево",
+                text = StringRes.ui.bottomBar.avlTreeEditor,
                 color = MaterialTheme.colors.onPrimary
             )
         }
@@ -222,13 +222,13 @@ private fun BottomBarSaveAndLoadTreeButtons(
         TextButton(onClick = onClickSaveButton) {
             Icon(
                 painter = painterResource("icons/save_as.svg"),
-                contentDescription = "Save tree",
+                contentDescription = StringRes.ui.bottomBar.saveTree,
                 tint = MaterialTheme.colors.onPrimary,
                 modifier = Modifier.size(36.dp)
             )
             Spacer(modifier = Modifier.width(6.dp))
             Text(
-                text = "Сохранить дерево",
+                text = StringRes.ui.bottomBar.saveTree,
                 color = MaterialTheme.colors.onPrimary
             )
         }
@@ -236,13 +236,13 @@ private fun BottomBarSaveAndLoadTreeButtons(
     TextButton(onClick = onClickLoadButton) {
         Icon(
             painter = painterResource("icons/folder_open.svg"),
-            contentDescription = "Load tree",
+            contentDescription = StringRes.ui.bottomBar.loadTree,
             tint = MaterialTheme.colors.onPrimary,
             modifier = Modifier.size(36.dp)
         )
         Spacer(modifier = Modifier.width(6.dp))
         Text(
-            text = "Загрузить дерево",
+            text = StringRes.ui.bottomBar.loadTree,
             color = MaterialTheme.colors.onPrimary
         )
     }
@@ -272,11 +272,13 @@ private fun InfoScreen() {
         Column {
             Spacer(modifier = Modifier.height(oneCentimeter))
             Text(
-                text = useResource("config/help.txt") { it.readAllBytes().decodeToString() },
-                modifier = Modifier.padding(
-                    start = oneCentimeter * 2,
-                    end = oneCentimeter
-                )
+                text = StringRes.text.help,
+                modifier = Modifier
+                    .padding(
+                        start = oneCentimeter * 2,
+                        end = oneCentimeter
+                    )
+                    .fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(oneCentimeter))
         }
@@ -284,9 +286,9 @@ private fun InfoScreen() {
 }
 
 private fun runSaveTreeDialog(): File? =
-    openSaveFileDialog(Global.window, "Сохранить дерево", listOf(""), false).firstOrNull()
+    openSaveFileDialog(Global.window, StringRes.ui.bottomBar.saveTree, listOf(""), false).firstOrNull()
 
 private fun runLoadTreeDialog(extension: String): File? =
-    openLoadFileDialog(Global.window, "Загрузить дерево", listOf(extension), false).firstOrNull()
+    openLoadFileDialog(Global.window, StringRes.ui.bottomBar.loadTree, listOf(extension), false).firstOrNull()
 
 enum class Page { Info, TreeEditor, AvlTreeEditor }

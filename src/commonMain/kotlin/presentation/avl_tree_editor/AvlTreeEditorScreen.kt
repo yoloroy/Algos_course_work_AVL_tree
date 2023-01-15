@@ -1,5 +1,6 @@
 package presentation.avl_tree_editor
 
+import StringRes
 import androidx.compose.runtime.*
 import com.yoloroy.algorithm_mod.AvlTree
 import presentation.tree_editor.NodeEditDialogData
@@ -29,8 +30,8 @@ fun AvlTreeEditorScreen(tree: AvlTree<Int>, reloadTree: () -> Unit) {
         insertNode = {
             dialogData = dialogData.copy(
                 open = true,
-                title = "Добавить значение в дерево",
-                label = "Значение в узле",
+                title = StringRes.ui.treeActions.binaryTreeEditor.add,
+                label = StringRes.ui.treeActions.dialogLabel.value,
                 onClickOk = {
                     tree.insertValue(dialogData.inputText.toInt())
                     reloadTree()
@@ -45,8 +46,8 @@ fun AvlTreeEditorScreen(tree: AvlTree<Int>, reloadTree: () -> Unit) {
         editNode = { node ->
             dialogData = dialogData.copy(
                 open = true,
-                title = "Изменить значение в узле дерева",
-                label = "Значение в узле",
+                title = StringRes.ui.treeActions.binaryTreeEditor.edit,
+                label = StringRes.ui.treeActions.dialogLabel.value,
                 onClickOk = {
                     tree.replaceValue(node.value.value, dialogData.inputText.toInt())
                     reloadTree()
