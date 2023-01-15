@@ -1,6 +1,7 @@
 package presentation.main_screen
 
 import Global
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -27,6 +28,7 @@ import java.io.File
 
 private val START_PAGE = TreeEditor
 
+@Preview
 @Composable
 fun MainScreen() { // TODO refactor
     val scaffoldState = rememberScaffoldState()
@@ -134,10 +136,6 @@ private fun BottomBar(
     onClickSaveButton: () -> Unit,
     onClickLoadButton: () -> Unit
 ) {
-    ScrollableTabRow(
-        selectedTabIndex = Page.values().indexOf(page),
-
-    )
     LazyRow(
         modifier = Modifier
             .background(MaterialTheme.colors.primarySurface)
