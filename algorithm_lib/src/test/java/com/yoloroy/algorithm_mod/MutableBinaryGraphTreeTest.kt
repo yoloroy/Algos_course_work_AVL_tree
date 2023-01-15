@@ -1,9 +1,8 @@
 package com.yoloroy.algorithm_mod
 
+import com.yoloroy.algorithm_mod.MutableBinaryGraphTree
 import com.yoloroy.algorithm_mod.MutableBinaryGraphTree.Node
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 
 internal class MutableBinaryGraphTreeTest {
 
@@ -34,10 +33,7 @@ internal class MutableBinaryGraphTreeTest {
                 }
             }
         }
-        assertEquals(
-            indentationTreePrint(expectedTree.root!!),
-            indentationTreePrint(tree.root!!)
-        )
+        assertTreeEquals(expectedTree, tree)
     }
 
     @Test
@@ -63,10 +59,7 @@ internal class MutableBinaryGraphTreeTest {
                 }
             }
         }
-        assertEquals(
-            indentationTreePrint(expectedTree.root!!, 2),
-            indentationTreePrint(tree.root!!, 2)
-        )
+        assertTreeEquals(expectedTree, tree)
     }
 
     @Test
@@ -94,10 +87,7 @@ internal class MutableBinaryGraphTreeTest {
                 }
             }
         }
-        assertEquals(
-            indentationTreePrint(expectedTree.root!!, 2),
-            indentationTreePrint(tree.root!!, 2)
-        )
+        assertTreeEquals(expectedTree, tree)
     }
 
     @Test
@@ -125,10 +115,7 @@ internal class MutableBinaryGraphTreeTest {
                 }
             }
         }
-        assertEquals(
-            indentationTreePrint(expectedTree.root!!, 2),
-            indentationTreePrint(tree.root!!, 2)
-        )
+        assertTreeEquals(expectedTree, tree)
     }
 
     @Test

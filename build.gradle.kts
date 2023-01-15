@@ -1,4 +1,3 @@
-import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
@@ -18,7 +17,10 @@ repositories {
 kotlin {
     jvm {
         compilations.all {
-            kotlinOptions.jvmTarget = "11"
+            kotlinOptions.apply {
+                jvmTarget = "11"
+                freeCompilerArgs += "-Xcontext-receivers"
+            }
         }
         withJava()
     }
@@ -26,15 +28,16 @@ kotlin {
         all {
             languageSettings.optIn("androidx.compose.ui.ExperimentalComposeUiApi")
             languageSettings.optIn("androidx.compose.material.ExperimentalMaterialApi")
+            languageSettings.optIn("androidx.compose.foundation.ExperimentalFoundationApi")
         }
-        val jvmMain by getting {
+        val commonMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation("${compose.ui}.input.pointer")
                 implementation(project("algorithm_lib"))
+                implementation(project("tree_saver"))
             }
         }
-        val jvmTest by getting
     }
 }
 

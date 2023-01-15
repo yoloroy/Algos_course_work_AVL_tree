@@ -2,6 +2,8 @@
 
 package com.yoloroy.algorithm_mod
 
+import com.yoloroy.algorithm_mod.buildBinaryGraphTree
+import com.yoloroy.algorithm_mod.forEach
 import com.yoloroy.algorithm_mod.MutableBinaryGraphTree.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -11,7 +13,7 @@ class BinaryGraphTreeTest {
     @Test
     fun forEachNode() {
         run {
-            val tree = buildBinaryGraphTree<Int> {
+            val tree = buildBinaryGraphTree {
                 root = Node(
                     value = 4,
                     left = Node(
@@ -35,7 +37,7 @@ class BinaryGraphTreeTest {
             assertEquals("1,2,3,4,5,6,7", list.joinToString(","))
         }
         run {
-            val tree = buildBinaryGraphTree<Int> {
+            val tree = buildBinaryGraphTree {
                 root = Node(
                     value = 67,
                     left = Node(value = 39),

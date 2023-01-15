@@ -15,3 +15,4 @@ pluginManagement {
 
 rootProject.name = "Algos_course_work_AVL_tree"
 include("algorithm_lib")
+include("tree_saver")
