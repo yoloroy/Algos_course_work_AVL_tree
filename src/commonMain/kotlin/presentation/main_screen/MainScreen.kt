@@ -16,6 +16,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.useResource
 import androidx.compose.ui.unit.dp
+import com.yoloroy.algorithm_mod.AvlTree
+import com.yoloroy.algorithm_mod.MutableBinaryGraphTree
 import com.yoloroy.loadAvlTree
 import com.yoloroy.loadTree
 import com.yoloroy.saveAvlTree
@@ -26,29 +28,19 @@ import presentation.util.openLoadFileDialog
 import presentation.util.openSaveFileDialog
 import java.io.File
 
-private val START_PAGE = TreeEditor
+private val START_PAGE = AvlTreeEditor
 
 @Preview
 @Composable
 fun MainScreen() { // TODO refactor
     val scaffoldState = rememberScaffoldState()
-    var page by remember {
-        mutableStateOf(
-            try {
-                val lastPage = useResource("config/last_page.txt") { it.readAllBytes().contentToString() }
-                Page.valueOf(lastPage)
-            } catch (e: IllegalArgumentException) {
-                START_PAGE
-            }
-        )
-    }
+    var page by remember { mutableStateOf(START_PAGE) } // TODO save and use last page
 
     var avlTree by remember {
         mutableStateOf(
-            loadAvlTree(
-                ClassLoader.getSystemResourceAsStream("sample_trees/sample_avl_tree.avl_tree.json")!!,
-                String::toInt
-            ),
+            ClassLoader.getSystemResourceAsStream("sample_trees/sample_avl_tree.avl_tree.json")
+                ?.let { loadAvlTree(it, String::toInt) }
+                ?: AvlTree(listOf(1, 2, 3, 4, 5)),
             neverEqualPolicy()
         )
     }
@@ -58,7 +50,9 @@ fun MainScreen() { // TODO refactor
     }
     var tree by remember {
         mutableStateOf(
-            loadTree(ClassLoader.getSystemResourceAsStream("sample_trees/sample_tree.tree.json")!!),
+            ClassLoader.getSystemResourceAsStream("sample_trees/sample_tree.tree.json")
+                ?.let { loadTree(it) }
+                ?: MutableBinaryGraphTree(1, 2, 3, 4, 5),
             neverEqualPolicy()
         )
     }
