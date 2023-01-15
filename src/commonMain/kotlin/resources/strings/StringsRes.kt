@@ -46,13 +46,13 @@ data class StringsRes(
         private val mapper = jacksonObjectMapper()
 
         fun load(locale: Locale): StringsRes = ClassLoader
-            .getSystemResourceAsStream("strings/${locale.toLanguageTag()}.json")
+            .getSystemResourceAsStream("strings/${locale.language}.json")
             ?.let { mapper.readValue(it, StringsRes::class.java) }
             ?: null.also {
-                System.err.println("String resources was not loaded successfully, locale: $locale")
+                System.err.println("String resources was not loaded successfully, language: ${locale.language}")
             }
             ?: ClassLoader
-                .getSystemResourceAsStream("strings/en-US.json")
+                .getSystemResourceAsStream("strings/en.json")
                 ?.let { mapper.readValue(it, StringsRes::class.java) }
             ?: default
     }
