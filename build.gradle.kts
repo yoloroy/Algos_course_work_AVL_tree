@@ -52,6 +52,9 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "Algos_course_work_AVL_tree"
             packageVersion = "1.0.0"
+            macOS {
+                iconFile.set(File("AppIcon.appiconset/app-icon.icns"))
+            }
         }
     }
 }
