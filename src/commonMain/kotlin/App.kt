@@ -20,7 +20,7 @@ fun App() {
     Window(
         onCloseRequest = ::exitApplication,
         title = "AVL Tree Simulator",
-        icon = painterResource("icons/binary-search-tree.svg")
+        icon = painterResource("icons/avl-tree-ru.svg")
     ) {
         Global.window = window
         ProjectTheme {

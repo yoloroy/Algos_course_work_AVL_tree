@@ -23,9 +23,11 @@ import com.yoloroy.loadTree
 import com.yoloroy.saveAvlTree
 import com.yoloroy.saveTree
 import presentation.avl_tree_editor.AvlTreeEditorScreen
+import presentation.info.InfoScreen
 import presentation.main_screen.Page.*
 import presentation.util.openLoadFileDialog
 import presentation.util.openSaveFileDialog
+import resources.icons.localizedPainterResource
 import java.io.File
 
 private val START_PAGE = AvlTreeEditor
@@ -187,7 +189,7 @@ private fun BottomBarPageButtons(setPage: (Page) -> Unit) {
         }
         TextButton(onClick = { setPage(AvlTreeEditor) }) {
             Icon(
-                painter = painterResource("icons/binary-search-tree.svg"),
+                painter = localizedPainterResource("icons/avl-tree.svg"),
                 contentDescription = StringRes.ui.bottomBar.avlTreeEditor,
                 tint = MaterialTheme.colors.onPrimary,
                 modifier = Modifier.size(36.dp)
@@ -245,43 +247,6 @@ private fun BottomBarSaveAndLoadTreeButtons(
             text = StringRes.ui.bottomBar.loadTree,
             color = MaterialTheme.colors.onPrimary
         )
-    }
-}
-
-context(BoxWithConstraintsScope)
-@Composable
-private fun InfoScreen() {
-    val pageWidth = 640.dp
-    val pseudoCentimetersWidth = 21
-    val oneCentimeter = pageWidth / pseudoCentimetersWidth
-    Surface(
-        modifier = Modifier
-            .align(Alignment.TopCenter)
-            .fillMaxHeight()
-            .verticalScroll(rememberScrollState())
-            .widthIn(max = pageWidth)
-            .run {
-                if (maxWidth >= pageWidth + oneCentimeter * 4) {
-                    padding(horizontal = oneCentimeter * 2)
-                } else {
-                    this
-                }
-            },
-        elevation = 2.dp
-    ) {
-        Column {
-            Spacer(modifier = Modifier.height(oneCentimeter))
-            Text(
-                text = StringRes.text.help,
-                modifier = Modifier
-                    .padding(
-                        start = oneCentimeter * 2,
-                        end = oneCentimeter
-                    )
-                    .fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(oneCentimeter))
-        }
     }
 }
 

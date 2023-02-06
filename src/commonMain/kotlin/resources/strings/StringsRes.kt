@@ -9,7 +9,9 @@ data class StringsRes(
 ) {
     companion object {
         val default get() = StringsRes(
-            Text(help = "Helper page"),
+            Text(
+                help = "Helper page"
+            ),
             Ui(
                 BottomBar(
                     avlTreeEditor = "AVL-tree",
@@ -18,13 +20,13 @@ data class StringsRes(
                     loadTree = "Load tree",
                     saveTree = "Save tree"
                 ),
-                treeActions = TreeActions(
-                    avlTreeEditor = AvlTreeEditor(
+                TreeActions(
+                    AvlTreeEditor(
                         delete = "Remove value",
                         insert = "Insert value",
                         replace = "Replace value"
                     ),
-                    binaryTreeEditor = BinaryTreeEditor(
+                    BinaryTreeEditor(
                         add = "Add node",
                         delete = "Delete node",
                         edit = "Edit value",
@@ -33,7 +35,7 @@ data class StringsRes(
                         rotateRL = "Rotate for RL case",
                         rotateRR = "Rotate for RR case"
                     ),
-                    dialogLabel = DialogLabel(
+                    DialogLabel(
                         value = "Value",
                         valueForNode = "Value for node",
                         cancel = "Cancel",
