@@ -24,6 +24,23 @@ class AvlTree<T: Comparable<T>>(values: Iterable<T>) : Iterable<T> {
     val tree: BinaryGraphTree<AvlData<T>> get() = mutableTree
 
     fun insertValue(valueToInsert: T) {
+        fun MutableAvlNode<T>.balanceThisAndUpdateHeight(path: Path) {
+            when {
+                path.endsWith(Left, Left) -> mutableTree.rotateLeftLeft(this)
+                path.endsWith(Left, Right) -> mutableTree.rotateLeftRight(this)
+                path.endsWith(Right, Left) -> mutableTree.rotateRightLeft(this)
+                path.endsWith(Right, Right) -> mutableTree.rotateRightRight(this)
+            }
+            val parentsChildren = (parent?.children?.toSet() ?: emptySet()) + this
+            parentsChildren.flatMap { it.children }.forEach { it.updateHeight() }
+            parentsChildren.forEach { it.updateHeight() }
+            parent?.updateHeight()
+        }
+
+        fun MutableAvlNode<T>.balanceThisAndUpdateHeightIfNecessary(path: Path) {
+            if (height >= 2 && diff(left?.height ?: 0, right?.height ?: 0) > 1) balanceThisAndUpdateHeight(path)
+        }
+
         fun MutableAvlNode<T>.insertValue(previousPath: Path = Path.empty()): Path? {
             val leftRight = leftRightOrNullFor(valueToInsert) ?: return null
             var child by if (leftRight == Left) this::left else this::right
@@ -34,15 +51,7 @@ class AvlTree<T: Comparable<T>>(values: Iterable<T>) : Iterable<T> {
             }
             val path = child!!.insertValue(previousPath + leftRight) ?: return null
             updateHeight()
-            if (height >= 2 && diff(left?.height ?: 0, right?.height ?: 0) > 1) {
-                when {
-                    path.endsWith(Left, Left) -> mutableTree.rotateLeftLeft(this)
-                    path.endsWith(Left, Right) -> mutableTree.rotateLeftRight(this)
-                    path.endsWith(Right, Left) -> mutableTree.rotateRightLeft(this)
-                    path.endsWith(Right, Right) -> mutableTree.rotateRightRight(this)
-                }
-                updateHeight()
-            }
+            balanceThisAndUpdateHeightIfNecessary(path)
             return path.popped()
         }
 
@@ -78,9 +87,6 @@ class AvlTree<T: Comparable<T>>(values: Iterable<T>) : Iterable<T> {
                         ?.also { node -> node.children.forEach { it.updateHeight() } }
                         ?.dig { node ->
                             node.updateHeight()
-                            println(node.height)
-                            println(node.children.map { it.height })
-                            println()
                             node.balanceIfNecessary()
                             node.parent
                         }
@@ -99,12 +105,6 @@ class AvlTree<T: Comparable<T>>(values: Iterable<T>) : Iterable<T> {
         insertValue(newValue)
     }
 
-    /**
-     * Find path to value or null
-     *
-     * @param predicate returns either we need to the [Right] child, [Left] child, or stop traversing by returning null
-     * @return path to value or null if value was not found
-     */
     fun findPathToValueOrNull(value: T): ValueWithPath<AvlData<T>>? {
         var node: MutableAvlNode<T>? = null
         val path = buildPath {
@@ -162,6 +162,10 @@ class AvlTree<T: Comparable<T>>(values: Iterable<T>) : Iterable<T> {
         operator fun component2() = height
 
         override fun toString() = "(value: $value, height: $height)"
+
+        override fun equals(other: Any?) = (other as? AvlData<*>)
+            ?.let { value == it.value && height == it.height }
+            ?: false
     }
 
     private fun AvlNode<T>.leftRightOrNullFor(otherValue: T) = when {
@@ -176,23 +180,25 @@ class AvlTree<T: Comparable<T>>(values: Iterable<T>) : Iterable<T> {
      * @return parent of removed node
      */
     private fun MutableAvlNode<T>.removeFromParentAndReplaceByChild(): MutableAvlNode<T>? {
+        // if it is leaf, then no rearrangements needed
         if (isLeaf()) return parent
             ?.also { removeFromParent() }
             ?: null.also { root = null }
 
+        // if it has only one child, then the only thing to do - replace by this child
         children.singleOrNull()?.let { child ->
             return parent
                 ?.also { it.replaceChildAndAssignParent(this, child) }
                 ?: null.also { root = child.also { it.parent = null } }
         }
 
+        // finding the deepest child for replacement
         val replacement = when (children.maxBy { it.height }) {
             left -> left!!.dig { it.right }
             else -> right!!.dig { it.left }
         }
         value = AvlData(replacement.value.value, height)
-        replacement.removeFromParentAndReplaceByChild()
-        return replacement.parent
+        return replacement.removeFromParentAndReplaceByChild()
     }
 }
 

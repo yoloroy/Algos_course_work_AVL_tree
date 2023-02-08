@@ -1,7 +1,5 @@
 package com.yoloroy.algorithm_mod
 
-import java.util.Stack
-
 abstract class BinaryGraphTree<T> {
 
     abstract val root: Node<T>?
@@ -99,6 +97,14 @@ abstract class BinaryGraphTree<T> {
 }
 
 inline fun <T> BinaryGraphTree<T>.forEach(crossinline block: (T) -> Unit) = forEachNode { block(it.value) }
+
+fun <T> BinaryGraphTree<T>.preOrderNodeSequence() = root?.preOrderNodeSequence() ?: emptySequence()
+
+fun <T> BinaryGraphTree.Node<T>.preOrderNodeSequence(): Sequence<BinaryGraphTree.Node<T>> = sequence {
+    yield(this@preOrderNodeSequence)
+    yieldAll(left?.preOrderNodeSequence() ?: emptySequence())
+    yieldAll(right?.preOrderNodeSequence() ?: emptySequence())
+}
 
 inline fun buildPath(block: MutableList<BinaryGraphTree.LeftRight>.() -> Unit) = BinaryGraphTree.Path(buildList(block))
 
